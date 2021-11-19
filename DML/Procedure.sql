@@ -154,8 +154,8 @@ drop procedure if exists UpdCourseRate;
 delimiter $$
 create procedure UpdCourseRate(CID char(15), StudentID char(7), Rate varchar(256))
 begin
-	call DeleteCourseRate(CID, StudentID);
-	call AddRateCourse(CID, StudentID, Rate);
+	update RateCourse r
+    set r.Rate=Rate where r.CID=CID and r.StudentID=StudentID;
 end$$
 delimiter ;
 
@@ -182,8 +182,9 @@ drop procedure if exists UpdTeacherRate;
 delimiter $$
 create procedure UpdTeacherRate(TID char(7), CID char(15), StudentID char(7), Morale int, Listening int, Speaking int, Reading int, Writing int)
 begin
-	call DeleteTeacherRate(TID, CID, StudentID);
-	call AddRateTeacher(TID, CID, StudentID, Morale, Listening, Speaking, Reading, Writing);
+	update RateTeacher r
+    set r.Morale=Morale and r.Listening=Listening and r.Speaking=Speaking and r.Reading=Reading and r.Writing=Writing 
+    where r.TID=TID and r.CID=CID and r.StudentID=StudentID;
 end$$
 delimiter ;
 
@@ -241,8 +242,8 @@ drop procedure if exists ChangeCourse;
 delimiter $$
 create procedure ChangeCourse(SID char(7), newCID char(15), oldCID char(15)) 
 begin
-	call CancelCourse(oldCID, SID);
-    call AddCourse(newCID, SID);
+	update Learn l
+	set l.CID=newCID where l.CID=oldCID and l.SID=SID;
 end$$
 delimiter ;
 
