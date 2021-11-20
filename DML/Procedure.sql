@@ -180,12 +180,13 @@ delimiter ;
 ###Cập nhật đánh giá giáo viên
 drop procedure if exists UpdTeacherRate;
 delimiter $$
-create procedure UpdTeacherRate(TID char(7), CID char(15), StudentID char(7), Morale int, Listening int, Speaking int, Reading int, Writing int)
+create procedure UpdTeacherRate(TID char(7), CID char(15), StudentID char(7), M int, L int, S int, R int, W int)
 begin
 	update RateTeacher r
-    set r.Morale=Morale and r.Listening=Listening and r.Speaking=Speaking and r.Reading=Reading and r.Writing=Writing 
+    set r.Morale=M, r.Listening=L, r.Speaking=S, r.Reading=R, r.Writing=W 
     where r.TID=TID and r.CID=CID and r.StudentID=StudentID;
-end$$
+end
+$$
 delimiter ;
 
 
