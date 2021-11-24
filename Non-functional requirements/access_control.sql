@@ -79,9 +79,3 @@ grant insert, update, delete on student_care.branch to bra_mng@localhost;
 
 flush privileges;
 
-#create index for table course and employee
-create index courseLevel on course (Level);
-create index job on employee (Job);
-
-show index from student_care.course;
-show index from student_care.employee;
